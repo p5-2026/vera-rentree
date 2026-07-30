@@ -29,7 +29,11 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
   background:linear-gradient(155deg,#071428 0%,#0b2550 55%,#071e3d 100%);
 }
 .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-@media(orientation:portrait){.hero-vid{object-fit:contain}}
+@media(orientation:portrait){
+  .hero-vid{position:relative;inset:auto;width:100%;height:auto;display:block;object-fit:contain}
+  .hero-overlay{display:none}
+  .hero-inner{flex:1}
+}
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:linear-gradient(to bottom,rgba(5,14,30,.52) 0%,rgba(5,14,30,.18) 42%,rgba(5,14,30,.62) 100%);
@@ -46,7 +50,7 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
 }
 .cd-suf{font-size:clamp(20px,5.2vw,36px);font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-top:8px}
 .cd-hms{font-size:clamp(14px,3.2vw,18px);font-weight:700;letter-spacing:.06em;opacity:.85;margin-top:12px;font-variant-numeric:tabular-nums}
-.cd-sub{font-size:clamp(9px,2.1vw,12px);font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.48;margin-top:14px}
+.cd-sub{font-size:clamp(12px,2.8vw,16px);font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-top:14px}
 .hero-bot{display:flex;flex-direction:column;align-items:center;gap:13px}
 .cv-greet{font-size:14px;font-weight:700;color:var(--sun);min-height:1.4em;letter-spacing:.02em;text-align:center}
 .bienvenue-btn{
