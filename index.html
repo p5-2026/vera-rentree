@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rentrée 2026 · 5ème Primaire · CNDP Erpent</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<meta name="theme-color" content="#0b2550">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rentrée P5">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Baloo+2:wght@600;700;800&display=swap');
 :root{
@@ -66,6 +73,14 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
 }
 .bienvenue-btn:hover{background:rgba(255,255,255,.2);text-decoration:none}
 .bienvenue-btn:active{transform:scale(.96)}
+.share-btn{
+  margin-top:2px;background:transparent;border:1.5px solid rgba(255,255,255,.35);color:#fff;
+  font-family:var(--f);font-size:12px;font-weight:700;letter-spacing:.03em;
+  padding:10px 24px;border-radius:50px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:background .2s,transform .15s;
+}
+.share-btn:hover{background:rgba(255,255,255,.14)}
+.share-btn:active{transform:scale(.96)}
 
 /* ── PAGE BODY ── */
 .page-body{position:relative;min-height:100vh}
@@ -104,6 +119,7 @@ main{max-width:660px;margin:0 auto;padding:14px 14px 60px;position:relative;z-in
 .mn{font-size:13px;color:var(--ink);line-height:1.3}
 .mp{font-size:15px;font-weight:800;color:var(--coral);white-space:nowrap;font-variant-numeric:tabular-nums}
 @media(max-width:380px){.menu{grid-template-columns:1fr}}
+@media(max-width:360px){.nb span:last-child{font-size:9.5px}}
 .ct{padding:12px 14px;border-top:1px solid var(--border);display:flex;gap:12px;align-items:center;min-height:54px}
 .ct:first-child{border-top:none}
 .ct-i{font-size:20px;width:28px;text-align:center;flex-shrink:0}
@@ -193,6 +209,7 @@ nav::-webkit-scrollbar{display:none}
       <p class="cv-greet" id="greet"></p>
       <p class="hero-wish" id="herowish"></p>
       <a class="bienvenue-btn" href="#content">BIENVENUE ↓</a>
+      <button class="share-btn" onclick="shareSite()">📤 Partager le site</button>
     </div>
   </div>
 </section>
@@ -206,10 +223,11 @@ nav::-webkit-scrollbar{display:none}
 
   <div class="p5-callout">
     <div class="p5-head">🌟 Spécial 5ème Primaire — notre classe</div>
-    <div class="p5-item"><span class="p5-ico">🎒</span><span><strong>Rentrée</strong> — 24/08 · 8h40</span></div>
-    <div class="p5-next">📌 Prochaine date à retenir</div>
-    <div class="p5-item"><span class="p5-ico">⭐</span><span><strong>Réunion plénière P5</strong> — <span class="p5-hl">31/08 · 19h30</span> (salle audio → Direction → puis en classe)</span></div>
-    <div class="p5-item"><span class="p5-ico">🏃</span><span><strong>Adeps P5</strong> — 22/09</span></div>
+    <div id="p5-list">
+    <div class="p5-item" data-date="2026-08-24"><span class="p5-ico">🎒</span><span><strong>Rentrée</strong> — 24/08 · 8h40</span></div>
+    <div class="p5-item" data-date="2026-08-31" data-hl="31/08 · 19h30"><span class="p5-ico">⭐</span><span><strong>Réunion plénière P5</strong> — 31/08 · 19h30 (salle audio → Direction → puis en classe)</span></div>
+    <div class="p5-item" data-date="2026-09-22" data-hl="22/09"><span class="p5-ico">🏃</span><span><strong>Adeps P5</strong> — 22/09</span></div>
+    </div>
   </div>
 
   <nav>
@@ -296,6 +314,13 @@ nav::-webkit-scrollbar{display:none}
         <span>🍲</span>
         <span>Repas chauds (Lu/Ma/Je/Ve) : <strong>5,75 €</strong> — à partir de septembre, commande avant le <strong>15 du mois précédent</strong>.</span>
       </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="sh"><span>Menu du mois</span></p>
+    <div class="card" id="menu-file-card">
+      <img src="menu-cantine.jpg" alt="Menu de la cantine" style="width:100%;display:block"
+        onerror="this.closest('#menu-file-card').innerHTML='&lt;div class=&quot;nbox nb-bl&quot; style=&quot;border-top:none&quot;&gt;&lt;span&gt;📄&lt;/span&gt;&lt;span&gt;Le menu du mois sera ajouté ici dès réception.&lt;/span&gt;&lt;/div&gt;'">
     </div>
   </div>
   <div class="section">
@@ -472,6 +497,22 @@ function buildCal(){
   c.innerHTML=h;
 }
 
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+async function shareSite(){
+  const shareData={title:document.title,text:'Rentrée 2026 — 5ème Primaire, toutes les infos pour les parents',url:location.href};
+  if(navigator.share){
+    try{await navigator.share(shareData);}catch(e){}
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(location.href);
+    alert('Lien copié ! Collez-le dans votre message.');
+  }catch(e){
+    window.prompt('Copiez ce lien :',location.href);
+  }
+}
+
 if(ACTS.length){
   const sec=document.getElementById('act-sec');
   if(sec){sec.style.display='';
@@ -479,8 +520,8 @@ if(ACTS.length){
     const dots=['#8B5CF6','#0097D6','#2ECC71','#F97316','#FF5A5F','#D4930A'];
     ACTS.forEach((a,i)=>{
       const idx=a.indexOf(':');
-      const name=idx>-1?a.slice(0,idx).trim():a.trim();
-      const when=idx>-1?a.slice(idx+1).trim():'';
+      const name=escHtml(idx>-1?a.slice(0,idx).trim():a.trim());
+      const when=escHtml(idx>-1?a.slice(idx+1).trim():'');
       grid.insertAdjacentHTML('beforeend',
         '<div class="ai"><div class="ap" style="background:'+dots[i%dots.length]+'"></div>'
         +'<div><div class="an">'+name+'</div>'+(when?'<div class="aw">⏰ '+when+'</div>':'')+'</div></div>');
@@ -501,13 +542,22 @@ function tick(){
   const preEl=document.getElementById('cdpre'), sufEl=document.getElementById('cdsuf'), subEl=document.getElementById('cdsub');
   const wishEl=document.getElementById('herowish');
   if(!dEl)return;
-  if(diff<=0){
+  if(diff<=0 && diff>-864e5){
     if(preEl)preEl.textContent="AUJOURD'HUI";
     dEl.textContent='🎉';
     if(sufEl){sufEl.classList.add('marker');sufEl.innerHTML='<span class="hl">BONNE RENTRÉE&nbsp;!</span>';}
     if(hEl)hEl.textContent='';
     if(subEl)subEl.textContent="BELLE RENTRÉE À TOUTES ET TOUS !";
     if(wishEl)wishEl.textContent=WISH;
+    return;
+  }
+  if(diff<=-864e5){
+    if(preEl)preEl.textContent='';
+    dEl.textContent='📚';
+    if(sufEl){sufEl.classList.remove('marker');sufEl.textContent="L'ANNÉE EST EN COURS";}
+    if(hEl)hEl.textContent='';
+    if(subEl)subEl.textContent='CONSULTEZ LES INFOS CI-DESSOUS';
+    if(wishEl)wishEl.textContent='';
     return;
   }
   const days=Math.floor(diff/864e5);
@@ -520,8 +570,28 @@ function tick(){
 tick();setInterval(tick,1000);
 buildCal();
 
+function buildP5Next(){
+  const list=document.getElementById('p5-list');
+  if(!list)return;
+  const items=[...list.querySelectorAll('.p5-item')];
+  list.querySelectorAll('.p5-next').forEach(n=>n.remove());
+  const now=new Date();
+  const nextItem=items.find(it=>new Date(it.dataset.date+'T23:59:59')>=now);
+  if(nextItem){
+    nextItem.insertAdjacentHTML('beforebegin','<div class="p5-next">📌 Prochaine date à retenir</div>');
+    const hl=nextItem.dataset.hl;
+    const textSpan=nextItem.children[1];
+    if(hl && textSpan && !nextItem.dataset.hlApplied){
+      textSpan.innerHTML=textSpan.innerHTML.replace(hl,'<span class="p5-hl">'+hl+'</span>');
+      nextItem.dataset.hlApplied='1';
+    }
+  }
+}
+buildP5Next();
+
 function pad2(n){return String(n).padStart(2,'0');}
 function icsStamp(y,m,d,h,mi){return y+pad2(m)+pad2(d)+'T'+pad2(h||0)+pad2(mi||0)+'00';}
+function escICS(s){return String(s).replace(/\\/g,'\\\\').replace(/,/g,'\\,').replace(/;/g,'\\;').replace(/\n/g,'\\n');}
 function makeICS(ev){
   let dtstart,dtend;
   if(ev.allDay){
@@ -534,7 +604,7 @@ function makeICS(ev){
   const uid='rentree-'+ev.start.join('')+'@p5-2026';
   const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Rentree P5//FR','CALSCALE:GREGORIAN',
     'BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+icsStamp(2026,8,24,0,0)+'Z',dtstart,dtend,
-    'SUMMARY:'+ev.title,'DESCRIPTION:'+ev.desc,'LOCATION:Collège Notre-Dame de la Paix, Erpent',
+    'SUMMARY:'+escICS(ev.title),'DESCRIPTION:'+escICS(ev.desc),'LOCATION:Collège Notre-Dame de la Paix\\, Erpent',
     'END:VEVENT','END:VCALENDAR'];
   return 'data:text/calendar;charset=utf8,'+encodeURIComponent(lines.join('\r\n'));
 }
