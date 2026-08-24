@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rentrée 2026 · 5ème Primaire · CNDP Erpent</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Baloo+2:wght@600;700;800&display=swap');
 :root{
   --sky:#0097D6;--sun:#FFD23F;--coral:#FF5A5F;--mint:#2ECC71;
   --ink:#1A2B3C;--bg:#F7F3EF;--card:#fff;--muted:#5C7A96;
@@ -42,17 +43,21 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
 .hero-top{padding-top:24px}
 .cv-school{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.55;line-height:1.65}
 .hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 0 8px}
-.cd-pre{font-size:clamp(11px,2.8vw,15px);font-weight:700;letter-spacing:.32em;text-transform:uppercase;opacity:.62;margin-bottom:10px}
+.cd-pre{font-family:'Baloo 2',var(--f);font-size:clamp(14px,3.4vw,19px);font-weight:800;letter-spacing:.28em;text-transform:uppercase;opacity:.75;margin-bottom:10px}
 .cd-num{
   display:block;font-size:clamp(102px,28vw,178px);font-weight:900;line-height:.88;
   color:var(--sun);letter-spacing:-.04em;font-variant-numeric:tabular-nums;
   text-shadow:0 4px 28px rgba(0,0,0,.4),0 0 70px rgba(255,210,63,.12);
 }
 .cd-suf{font-size:clamp(20px,5.2vw,36px);font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-top:8px}
+.cd-suf.marker{font-family:'Permanent Marker',cursive;font-weight:400;letter-spacing:.04em;font-size:clamp(30px,8.5vw,56px);text-transform:none;margin-top:14px;line-height:1.15}
+.hl{position:relative;display:inline-block;color:#1A2B3C;padding:.06em .25em;z-index:1}
+.hl::before{content:'';position:absolute;left:-8px;right:-8px;top:12%;bottom:6%;background:var(--sun);opacity:.92;transform:rotate(-1.4deg);border-radius:6px 14px 6px 14px;z-index:-1}
 .cd-hms{font-size:clamp(14px,3.2vw,18px);font-weight:700;letter-spacing:.06em;opacity:.85;margin-top:12px;font-variant-numeric:tabular-nums}
-.cd-sub{font-size:clamp(12px,2.8vw,16px);font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-top:14px}
+.cd-sub{font-family:'Baloo 2',var(--f);font-size:clamp(14px,3.2vw,19px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:16px}
 .hero-bot{display:flex;flex-direction:column;align-items:center;gap:13px}
 .cv-greet{font-size:14px;font-weight:700;color:var(--sun);min-height:1.4em;letter-spacing:.02em;text-align:center}
+.hero-wish{font-family:'Baloo 2',var(--f);font-size:16px;font-weight:600;line-height:1.5;color:#fff;opacity:.92;text-align:center;max-width:360px;margin:0 auto}
 .bienvenue-btn{
   display:inline-block;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.32);color:#fff;
   font-family:var(--f);font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
@@ -109,6 +114,10 @@ main{max-width:660px;margin:0 auto;padding:14px 14px 60px;position:relative;z-in
 .ap{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .an{font-weight:700;font-size:14.5px}
 .aw{font-size:12px;color:var(--muted);margin-top:2px}
+.ai-row{justify-content:space-between}
+.ics-btn{background:var(--sky);color:#fff;font-size:12px;font-weight:800;padding:9px 16px;border-radius:20px;text-decoration:none;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.ics-btn:hover{text-decoration:none;opacity:.88}
+.ics-btn:active{transform:scale(.96)}
 .cal-legend{display:flex;flex-wrap:wrap;gap:6px 12px;padding:10px 14px}
 .leg-i{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink)}
 .cal-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
@@ -156,6 +165,9 @@ nav::-webkit-scrollbar{display:none}
 .p5-item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:14px;line-height:1.5}
 .p5-item+.p5-item{border-top:1px dashed #F3B8D6}
 .p5-ico{font-size:17px;flex-shrink:0}
+.p5-next{font-family:'Baloo 2',var(--f);font-size:15px;font-weight:800;letter-spacing:.02em;color:#C21E76;margin:2px 0 4px}
+.p5-hl{position:relative;display:inline-block;color:#1A2B3C;font-weight:800;padding:.02em .22em;z-index:1}
+.p5-hl::before{content:'';position:absolute;left:-5px;right:-5px;top:8%;bottom:2%;background:var(--sun);opacity:.92;transform:rotate(-1.2deg);border-radius:5px 12px 5px 12px;z-index:-1}
 </style>
 </head>
 <body>
@@ -171,14 +183,15 @@ nav::-webkit-scrollbar{display:none}
       <div class="cv-school">Collège Notre-Dame de la Paix<br>École Primaire · Erpent</div>
     </div>
     <div class="hero-center">
-      <p class="cd-pre">PLUS QUE</p>
+      <p class="cd-pre" id="cdpre">PLUS QUE</p>
       <span class="cd-num" id="cdd">--</span>
-      <p class="cd-suf">JOURS</p>
+      <p class="cd-suf" id="cdsuf">JOURS</p>
       <p class="cd-hms" id="cdhms">-- h -- min -- s</p>
-      <p class="cd-sub">AVANT LA RENTRÉE</p>
+      <p class="cd-sub" id="cdsub">AVANT LA RENTRÉE</p>
     </div>
     <div class="hero-bot">
       <p class="cv-greet" id="greet"></p>
+      <p class="hero-wish" id="herowish"></p>
       <a class="bienvenue-btn" href="#content">BIENVENUE ↓</a>
     </div>
   </div>
@@ -194,7 +207,8 @@ nav::-webkit-scrollbar{display:none}
   <div class="p5-callout">
     <div class="p5-head">🌟 Spécial 5ème Primaire — notre classe</div>
     <div class="p5-item"><span class="p5-ico">🎒</span><span><strong>Rentrée</strong> — 24/08 · 8h40</span></div>
-    <div class="p5-item"><span class="p5-ico">⭐</span><span><strong>Réunion plénière P5</strong> — 31/08 · 19h30 (salle audio → Direction → puis en classe)</span></div>
+    <div class="p5-next">📌 Prochaine date à retenir</div>
+    <div class="p5-item"><span class="p5-ico">⭐</span><span><strong>Réunion plénière P5</strong> — <span class="p5-hl">31/08 · 19h30</span> (salle audio → Direction → puis en classe)</span></div>
     <div class="p5-item"><span class="p5-ico">🏃</span><span><strong>Adeps P5</strong> — 22/09</span></div>
   </div>
 
@@ -203,6 +217,7 @@ nav::-webkit-scrollbar{display:none}
     <button class="nb" onclick="show('inf',this)"><span class="ni">📋</span><span>Infos</span></button>
     <button class="nb" onclick="show('cal',this)"><span class="ni">🗓️</span><span>Calendrier</span></button>
     <button class="nb" onclick="show('act',this)"><span class="ni">🎨</span><span>Activités</span></button>
+    <button class="nb" onclick="show('imp',this)"><span class="ni">📌</span><span>Dates</span></button>
   </nav>
 
   <div class="pane on" id="pane-hor">
@@ -343,6 +358,19 @@ nav::-webkit-scrollbar{display:none}
 
   </div>
 
+  <div class="pane" id="pane-imp">
+  <div class="section">
+    <p class="sh"><span>Dates importantes — à ajouter à votre calendrier</span></p>
+    <div class="card"><div class="ag" id="imp-grid"></div></div>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="nbox nb-bl" style="border-top:none">
+      <span>💡</span>
+      <span>Appuyez sur <strong>+ Ajouter</strong> pour enregistrer l'événement directement dans le calendrier de votre téléphone.</span>
+    </div>
+  </div>
+  </div>
+
   </main>
 </div>
 
@@ -465,11 +493,23 @@ if(greetEl)greetEl.textContent=CHILD?'Bonjour '+CHILD+' ! 👋':'';
 const actHeadEl=document.getElementById('act-head');
 if(actHeadEl)actHeadEl.textContent=CHILD?'Activités de '+CHILD:'Activités';
 
+const WISH="Bonne rentrée à toute la 5ème ! 🎒 Que cette année soit pleine de découvertes et de belles réussites — courage aux parents, et amusez-vous bien les enfants !";
+
 function tick(){
   const diff=TARGET-new Date();
   const dEl=document.getElementById('cdd'), hEl=document.getElementById('cdhms');
+  const preEl=document.getElementById('cdpre'), sufEl=document.getElementById('cdsuf'), subEl=document.getElementById('cdsub');
+  const wishEl=document.getElementById('herowish');
   if(!dEl)return;
-  if(diff<=0){dEl.textContent='🎉';if(hEl)hEl.textContent='';return;}
+  if(diff<=0){
+    if(preEl)preEl.textContent="AUJOURD'HUI";
+    dEl.textContent='🎉';
+    if(sufEl){sufEl.classList.add('marker');sufEl.innerHTML='<span class="hl">BONNE RENTRÉE&nbsp;!</span>';}
+    if(hEl)hEl.textContent='';
+    if(subEl)subEl.textContent="BELLE RENTRÉE À TOUTES ET TOUS !";
+    if(wishEl)wishEl.textContent=WISH;
+    return;
+  }
   const days=Math.floor(diff/864e5);
   const hrs=Math.floor(diff%864e5/36e5);
   const min=Math.floor(diff%36e5/6e4);
@@ -479,6 +519,47 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 buildCal();
+
+function pad2(n){return String(n).padStart(2,'0');}
+function icsStamp(y,m,d,h,mi){return y+pad2(m)+pad2(d)+'T'+pad2(h||0)+pad2(mi||0)+'00';}
+function makeICS(ev){
+  let dtstart,dtend;
+  if(ev.allDay){
+    dtstart='DTSTART;VALUE=DATE:'+ev.start[0]+pad2(ev.start[1])+pad2(ev.start[2]);
+    dtend='DTEND;VALUE=DATE:'+ev.end[0]+pad2(ev.end[1])+pad2(ev.end[2]);
+  } else {
+    dtstart='DTSTART:'+icsStamp(...ev.start);
+    dtend='DTEND:'+icsStamp(...ev.end);
+  }
+  const uid='rentree-'+ev.start.join('')+'@p5-2026';
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Rentree P5//FR','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+icsStamp(2026,8,24,0,0)+'Z',dtstart,dtend,
+    'SUMMARY:'+ev.title,'DESCRIPTION:'+ev.desc,'LOCATION:Collège Notre-Dame de la Paix, Erpent',
+    'END:VEVENT','END:VCALENDAR'];
+  return 'data:text/calendar;charset=utf8,'+encodeURIComponent(lines.join('\r\n'));
+}
+
+const IMP_EVENTS=[
+  {ico:'🎒',color:'#2ECC71',title:'Rentrée scolaire',desc:'Début des cours 8h40',label:'24/08 · 8h40',allDay:true,start:[2026,8,24],end:[2026,8,25]},
+  {ico:'⭐',color:'#E91E8C',title:'Réunion plénière P5',desc:"Salle audio des secondaires puis en classe avec le/la titulaire",label:'31/08 · 19h30',allDay:false,start:[2026,8,31,19,30],end:[2026,8,31,20,30]},
+  {ico:'🏃',color:'#4BA3D9',title:'Adeps P5',desc:'Journée sportive Adeps — notre classe',label:'22/09',allDay:true,start:[2026,9,22],end:[2026,9,23]},
+  {ico:'🍂',color:'#F5A623',title:"Congé d'automne (Toussaint)",desc:'Retour en classe le 03/11',label:'17/10 → 02/11',allDay:true,start:[2026,10,17],end:[2026,11,3]},
+  {ico:'❄️',color:'#F5A623',title:"Congé d'hiver (Noël)",desc:'Retour en classe le 04/01',label:'19/12 → 03/01',allDay:true,start:[2026,12,19],end:[2027,1,4]},
+  {ico:'🎪',color:'#F5A623',title:'Congé de Carnaval',desc:'Retour en classe le 08/03',label:'20/02 → 07/03',allDay:true,start:[2027,2,20],end:[2027,3,8]},
+  {ico:'🌷',color:'#F5A623',title:'Congé de Printemps (Pâques)',desc:'Retour en classe le 10/05',label:'24/04 → 09/05',allDay:true,start:[2027,4,24],end:[2027,5,10]},
+  {ico:'🏖️',color:'#F5A623',title:"Vacances d'été",desc:"Fin de l'année scolaire",label:'dès le 03/07',allDay:true,start:[2027,7,3],end:[2027,7,4]}
+];
+const impGrid=document.getElementById('imp-grid');
+if(impGrid){
+  IMP_EVENTS.forEach(ev=>{
+    impGrid.insertAdjacentHTML('beforeend',
+      '<div class="ai ai-row"><div style="display:flex;align-items:center;gap:12px">'
+      +'<div class="ap" style="background:'+ev.color+'"></div>'
+      +'<div><div class="an">'+ev.ico+' '+ev.title+'</div><div class="aw">'+ev.label+'</div></div></div>'
+      +'<a class="ics-btn" href="'+makeICS(ev)+'" download="'+ev.title.replace(/[^a-z0-9]+/gi,'-')+'.ics">+ Ajouter</a>'
+      +'</div>');
+  });
+}
 
 function show(id,btn){
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
