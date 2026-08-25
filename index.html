@@ -176,6 +176,10 @@ main{max-width:660px;margin:0 auto;padding:14px 14px 60px;position:relative;z-in
 .ai-row{justify-content:space-between}
 .ics-btn{background:var(--sky);color:#fff;font-size:12px;font-weight:800;padding:9px 16px;border-radius:20px;text-decoration:none;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent}
 .ics-btn:hover{text-decoration:none;opacity:.88}
+.doc-dl{margin-top:10px;background:var(--tag);border-radius:12px;padding:11px 12px;border:1px solid var(--border)}
+.doc-dl-h{font-size:12.5px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.doc-dl-t{font-size:11.5px;color:var(--muted);line-height:1.4;margin-bottom:9px}
+.doc-dl-btn{display:block;width:100%;text-align:center;box-sizing:border-box}
 
 /* ── ACTIVITÉS PARASCOLAIRES ── */
 .act-card{background:var(--card);border-radius:16px;padding:12px 8px;border:1px solid var(--border);box-shadow:0 3px 14px rgba(20,40,80,.09);text-align:center}
@@ -185,6 +189,8 @@ main{max-width:660px;margin:0 auto;padding:14px 14px 60px;position:relative;z-in
 .act-card .ac-classes{font-size:10px;font-weight:700;color:var(--sky);background:rgba(0,151,214,.09);border-radius:8px;padding:2px 7px;display:inline-block;margin-bottom:6px}
 .act-card .ac-price{font-size:13px;font-weight:900;color:var(--ink)}
 .act-card .ac-badge{margin-top:7px;font-size:8.5px;font-weight:700;color:var(--mint);letter-spacing:.01em;line-height:1.25}
+.ac-days-row{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-bottom:6px}
+.act-day-pill{font-size:9.5px;font-weight:800;color:var(--ink);background:var(--tag);border-radius:7px;padding:2px 7px}
 
 .adsl-contact{border-top:1px solid var(--border);padding-top:11px;display:flex;flex-direction:column;gap:7px}
 .adsl-contact-h{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
@@ -406,7 +412,13 @@ nav{
       <li><span class="ico">🏷️</span><span><strong>Étiqueter tout le matériel</strong> au prénom et nom</span></li>
       <li><span class="ico">💊</span><span><strong>Médicaments interdits</strong> sauf avis médical. Signalez asthme, diabète, allergie au titulaire</span></li>
       <li><span class="ico">🟢🔴</span><span><strong>Carte verte</strong> = part seul. <strong>Carte rouge</strong> = cour / étude 15h45. Départ exceptionnel : mot dans le journal</span></li>
-      <li><span class="ico">📝</span><span>Absences : justifiée par écrit — &lt;3 jours : le jour du retour · &gt;3 jours : dès le 4ème. <a href="mailto:c.hicorne@cndp-erpent.be">c.hicorne@cndp-erpent.be</a></span></li>
+      <li><span class="ico">📝</span><span>Absences : justifiée par écrit — &lt;3 jours : le jour du retour · &gt;3 jours : dès le 4ème. <a href="mailto:c.hicorne@cndp-erpent.be">c.hicorne@cndp-erpent.be</a>
+        <div class="doc-dl">
+          <div class="doc-dl-h">📄 Justificatif d'absence</div>
+          <div class="doc-dl-t">Téléchargez le document officiel de l'école à compléter en cas d'absence.</div>
+          <a class="ics-btn doc-dl-btn" href="justificatif-absence.docx" download>Télécharger le justificatif d'absence ↓</a>
+        </div>
+      </span></li>
       <li><span class="ico">🎒</span><span>À remettre : fiche médicale, fiche signalétique (corrections en ROUGE), inscription extrascolaire, autorisation publication</span></li>
       <li><span class="ico">🐛</span><span>Poux : surveiller régulièrement — prévenir l'école si présence, traitement avant retour</span></li>
     </ul></div>
@@ -441,9 +453,9 @@ nav{
   <div class="pane" id="pane-act">
 
   <div class="section">
-    <p class="sh"><span>Activités parascolaires 2026–2027</span></p>
+    <p class="sh"><span>🎨 Activités CLUB durant toute l'année</span></p>
     <div class="card" style="padding:14px">
-      <p style="font-size:13px;color:var(--muted);line-height:1.5;margin:0">Des activités proposées après les cours, accessibles aux élèves de P5.</p>
+      <p style="font-size:13px;color:var(--muted);line-height:1.5;margin:0">Des activités d'une heure proposées certains jours après les cours. L'enfant s'engage pour l'année.</p>
     </div>
   </div>
 
@@ -451,56 +463,99 @@ nav{
     <div class="card">
       <div class="nbox nb-bl" style="border-top:none">
         <span>📅</span>
-        <span>Début des activités : <strong>7 septembre 2026</strong></span>
+        <span>Du <strong>7 septembre 2026</strong> au <strong>15 avril 2027</strong></span>
       </div>
       <div class="nbox">
-        <span>💡</span>
-        <span>Une séance d'essai gratuite est possible en début d'année. Maximum <strong>25 participants</strong> par activité.</span>
+        <span>🗓️</span>
+        <span><strong>25 séances</strong> prévues sur l'année</span>
+      </div>
+      <div class="nbox">
+        <span>🎁</span>
+        <span><strong>1ère séance d'essai gratuite</strong></span>
+      </div>
+      <div class="nbox">
+        <span>💳</span>
+        <span>Cotisation annuelle — paiement en une seule fois</span>
       </div>
     </div>
+    <details class="hor-fold" style="margin-top:8px">
+      <summary style="font-size:12.5px;padding:11px 16px">En savoir plus sur les séances</summary>
+      <div class="hor-fold-body">
+        <p style="font-size:12px;color:var(--muted);line-height:1.55;margin:6px 0 0">Les cours suivent le calendrier scolaire. Des dates supplémentaires peuvent être planifiées en début de saison afin d'anticiper certaines absences. Les dates des cours peuvent être consultées dans MyCFS : <strong>Séances → Consulter mes séances</strong>.</p>
+      </div>
+    </details>
   </div>
 
   <div class="section">
-    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
-      <div class="act-card">
-        <div class="ac-dot" style="background:rgba(255,90,95,.14);color:#FF5A5F">🎨</div>
-        <div class="ac-name">Mini Artiste</div>
-        <div class="ac-when">Lundi<br>15h45–16h45</div>
-        <div class="ac-classes">P3–P6</div>
-        <div class="ac-price">225 €/an</div>
-        <div class="ac-badge">✓ Accessible aux P5</div>
-      </div>
-      <div class="act-card">
-        <div class="ac-dot" style="background:rgba(155,93,212,.14);color:#9B5DD4">🎨</div>
-        <div class="ac-name">Artiste</div>
-        <div class="ac-when">Jeudi<br>15h45–16h45</div>
-        <div class="ac-classes">P3–P6</div>
-        <div class="ac-price">225 €/an</div>
-        <div class="ac-badge">✓ Accessible aux P5</div>
-      </div>
-      <div class="act-card">
-        <div class="ac-dot" style="background:rgba(0,151,214,.14);color:#0097D6">💻</div>
-        <div class="ac-name">Informatique</div>
-        <div class="ac-when">Jeudi<br>15h45–16h45</div>
-        <div class="ac-classes">P3–P6</div>
-        <div class="ac-price">145 €/an</div>
-        <div class="ac-badge">✓ Accessible aux P5</div>
-      </div>
-    </div>
+    <div id="activitiesGrid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px"></div>
   </div>
 
   <div class="section">
+    <p class="sh"><span>📚 Études dirigées</span></p>
     <div class="card" style="padding:14px">
-      <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:13.5px;color:var(--ink);margin-bottom:8px"><span>📝</span><span>Inscriptions &amp; renseignements</span></div>
-      <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin:0 0 12px">Les inscriptions aux activités parascolaires se font en ligne.</p>
-      <a class="ics-btn" href="https://inscriptions.adslstages.be/stages" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;text-align:center;box-sizing:border-box;margin-bottom:12px">S'inscrire aux activités →</a>
-      <div class="adsl-contact">
-        <div class="adsl-contact-h">Une question ?</div>
-        <a href="tel:+3281611840">📞 081 61 18 40</a>
-        <a href="mailto:info@adslstages.be">✉️ info@adslstages.be</a>
-        <a href="https://www.adslstages.be" target="_blank" rel="noopener noreferrer">🌐 www.adslstages.be</a>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <div class="ac-dot" style="width:32px;height:32px;background:rgba(75,163,217,.14);color:#4BA3D9;flex-shrink:0;margin:0">📚</div>
+        <div>
+          <div style="font-weight:800;font-size:13.5px;color:var(--ink);line-height:1.3">Lundi · Mardi · Jeudi · Vendredi</div>
+          <div style="font-weight:600;color:var(--muted);font-size:12px">15h45–16h45 · P3–P6</div>
+        </div>
+      </div>
+      <div style="font-size:15px;font-weight:900;color:var(--ink);margin-bottom:8px">145 €/an</div>
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin:0 0 10px">Les enfants sont encadrés et accompagnés par des professeurs de l'école pour faire leurs devoirs ou réviser une matière.</p>
+      <div class="nbox nb-am" style="border-radius:10px;margin-bottom:8px">
+        <span>⚠️</span>
+        <span>Les parents ne peuvent reprendre les enfants qu'à partir de <strong>16h45</strong>.</span>
+      </div>
+      <p style="font-size:11.5px;color:var(--muted);margin:0">L'inscription se fait pour un jour et une heure fixes. Début : <strong>7 septembre 2026</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="sh"><span>📝 Comment s'inscrire ?</span></p>
+    <div class="card" style="padding:14px;margin-bottom:8px">
+      <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:6px">👤 Déjà membre du CFS</div>
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin:0 0 10px">Vous avez reçu un e-mail avec vos identifiants de connexion. Connectez-vous à MyCFS puis inscrivez votre enfant dans « Parascolaires (dans mon école) ».</p>
+      <a class="ics-btn" href="https://www.mycfs.be" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;text-align:center;box-sizing:border-box">Ouvrir MyCFS →</a>
+    </div>
+    <div class="card" style="padding:14px">
+      <div style="font-weight:800;font-size:13px;color:var(--ink);margin-bottom:6px">✨ Nouveau au CFS</div>
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin:0 0 10px">Vous recevrez vos identifiants de connexion dans l'e-mail de confirmation d'inscription. Inscription sur <strong>www.lecfs.be</strong> ou en contactant le CFS.</p>
+      <div class="adsl-contact" style="border-top:none;padding-top:0">
+        <a href="tel:+3210227396">📞 010 22 73 96</a>
+        <a href="mailto:info@lecfs.be">✉️ info@lecfs.be</a>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+    <details class="hor-fold">
+      <summary>📱 À quoi sert MyCFS ?</summary>
+      <div class="hor-fold-body">
+        <ul class="il" style="margin:0">
+          <li><span class="ico">✅</span><span>Inscrire son enfant aux activités CLUB et écoles de devoirs</span></li>
+          <li><span class="ico">✅</span><span>Consulter l'historique des inscriptions</span></li>
+          <li><span class="ico">✅</span><span>Consulter les dates des séances</span></li>
+          <li><span class="ico">✅</span><span>Accéder aux attestations fiscales et mutuelles</span></li>
+          <li><span class="ico">✅</span><span>Recevoir les messages des équipes administratives</span></li>
+          <li><span class="ico">✅</span><span>Suivre l'état des paiements des activités</span></li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="section">
+    <p class="sh"><span>🧾 Attestations &amp; mutuelle</span></p>
+    <div class="card">
+      <div class="nbox" style="border-top:none">
+        <span>🧾</span>
+        <span>Après réception du paiement de l'activité, les attestations sont disponibles dans votre espace personnel MyCFS. Elles peuvent être utilisées pour la déclaration fiscale et auprès de votre mutuelle.</span>
+      </div>
+      <div class="nbox nb-am">
+        <span>💶</span>
+        <span>Certaines mutuelles remboursent jusqu'à <strong>50 €</strong> par année.</span>
+      </div>
+    </div>
+    <a class="ics-btn" href="https://www.mycfs.be" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px">Voir mes attestations dans MyCFS →</a>
   </div>
 
   <div class="act-divider"><span>Accueil de l'école</span></div>
@@ -551,6 +606,10 @@ nav{
     <div class="nbox nb-bl" style="border-top:none">
       <span>ℹ️</span>
       <span><strong>Bon à savoir :</strong> chaque élève doit se munir de son badge pour assurer le suivi de son temps d'accueil. Les accueils extrascolaires sont facturés mensuellement. En cas de retard, merci de prévenir les coordinateurs.</span>
+    </div>
+    <div class="nbox">
+      <span>❤️</span>
+      <span><strong>Fiche santé :</strong> une fiche santé est disponible dans MyCFS. Il est demandé aux parents de la compléter afin d'assurer au mieux la sécurité des enfants.</span>
     </div>
   </div>
 
@@ -739,6 +798,32 @@ const actHeadEl=document.getElementById('act-head');
 if(actHeadEl)actHeadEl.textContent=CHILD?'Activités de '+CHILD:'Activités';
 
 const TODAY_MSG="☀️ Bonne semaine aux P5 !";
+
+// Source unique des activités CLUB — modifier prix/horaires ici uniquement.
+const ACTIVITIES=[
+  {id:'artiste',category:'club',ico:'🎨',color:'#9B5DD4',title:'Artiste',days:['Mardi','Jeudi'],time:'15h45–16h45',classes:'P1–P6',price:'225 €/an',startDate:'2026-09-07',endDate:'2027-04-15',sessions:25,trial:true,registration:'mycfs',description:"Découverte d'artistes et création de ses propres œuvres : peinture, modelage, bricolages, papier mâché…",important:'',p5:true},
+  {id:'informatique',category:'club',ico:'💻',color:'#0097D6',title:'Informatique',days:['Jeudi'],time:'15h45–16h45',classes:'P3–P6',price:'205 €/an',startDate:'2026-09-07',endDate:'2027-04-15',sessions:25,trial:true,registration:'mycfs',description:"Découverte de l'ordinateur, recherches efficaces, création de livres numériques, codage et programmation de robots.",important:'',p5:true},
+  {id:'mini-artiste',category:'club',ico:'🎨',color:'#FF5A5F',title:'Mini Artiste',days:[],time:'',classes:'ACC–M3',price:'',startDate:'',endDate:'',sessions:null,trial:null,registration:'mycfs',description:'',important:'',p5:false}
+];
+
+function renderActivities(){
+  const wrap=document.getElementById('activitiesGrid');
+  if(!wrap)return;
+  const list=ACTIVITIES.filter(a=>a.p5 && a.category==='club');
+  wrap.innerHTML=list.map(a=>{
+    const daysHtml=a.days.map(d=>'<span class="act-day-pill">'+d+'</span>').join('');
+    return '<div class="act-card">'
+      +'<div class="ac-dot" style="background:'+a.color+'22;color:'+a.color+'">'+a.ico+'</div>'
+      +'<div class="ac-name">'+escHtml(a.title)+'</div>'
+      +'<div class="ac-days-row">'+daysHtml+'</div>'
+      +'<div class="ac-when">'+escHtml(a.time)+'</div>'
+      +'<div class="ac-classes">'+escHtml(a.classes)+'</div>'
+      +'<div class="ac-price">'+escHtml(a.price)+'</div>'
+      +'<div class="ac-badge">✓ Accessible aux P5</div>'
+      +'</div>';
+  }).join('');
+}
+renderActivities();
 
 const MOIS_ABBR=['JANV','FÉVR','MARS','AVR','MAI','JUIN','JUIL','AOÛT','SEPT','OCT','NOV','DÉC'];
 
