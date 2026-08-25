@@ -32,7 +32,7 @@ strong{font-weight:700}
 code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;font-family:monospace}
 
 /* ── HERO (original working version) ── */
-.hero{position:relative;min-height:100svh;min-height:100vh;overflow:hidden;background:linear-gradient(155deg,#071428 0%,#0b2550 55%,#071e3d 100%)}
+.hero{position:relative;z-index:5;min-height:100svh;min-height:100vh;overflow:hidden;background:linear-gradient(155deg,#071428 0%,#0b2550 55%,#071e3d 100%)}
 .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media(orientation:portrait){
   .hero-vid{position:relative;inset:auto;width:100%;height:auto;display:block;object-fit:contain}
@@ -82,7 +82,7 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
 .rdv-card{
   background:linear-gradient(135deg,var(--navy2),#0a1f3d);
   border:1.5px solid rgba(233,30,140,.35);
-  border-radius:18px;padding:16px;margin:0 0 14px;
+  border-radius:18px;padding:14px 16px;margin:0 0 8px;
   box-shadow:0 10px 30px rgba(0,10,30,.4);
 }
 .rdv-head{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.12em;color:#FF6FB5;margin-bottom:12px}
@@ -95,8 +95,7 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
 .rdv-title{font-size:16.5px;font-weight:800;color:#fff;line-height:1.25;margin-bottom:6px}
 .rdv-time{font-size:13px;color:#B9D4FF;margin-bottom:3px}
 .rdv-loc{font-size:12px;color:var(--onnavy-mut);line-height:1.4}
-.rdv-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);flex-wrap:wrap}
-.rdv-count{font-size:12.5px;font-weight:700;color:#B9D4FF}
+.rdv-foot{display:flex;align-items:center;justify-content:flex-end;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}
 .rdv-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:#fff;font-family:var(--f);font-size:12px;font-weight:700;padding:9px 16px;border-radius:20px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .rdv-btn:hover{background:rgba(255,255,255,.2)}
 
@@ -257,8 +256,7 @@ nav{
       </div>
     </div>
     <div class="rdv-foot">
-      <span class="rdv-count" id="rdvCount"></span>
-      <button class="rdv-btn" onclick="show('cal',document.querySelector('[data-tab=cal]'))">Voir le calendrier →</button>
+      <button class="rdv-btn" onclick="goToCalendar()">Voir le calendrier →</button>
     </div>
   </div>
 
@@ -627,14 +625,13 @@ function renderRdv(){
   const locEl=document.getElementById('rdvLoc');
   locEl.textContent=ev.loc?'📍 '+ev.loc:'';
   locEl.style.display=ev.loc?'':'none';
-  const today0=new Date();today0.setHours(0,0,0,0);
-  const evDay=new Date(ev.start[0],ev.start[1]-1,ev.start[2]);evDay.setHours(0,0,0,0);
-  const diffDays=Math.round((evDay-today0)/864e5);
-  let countTxt;
-  if(diffDays<=0)countTxt="Aujourd'hui";
-  else if(diffDays===1)countTxt='Demain';
-  else countTxt='Dans '+diffDays+' jours';
-  document.getElementById('rdvCount').textContent='📅 '+countTxt;
+}
+
+function goToCalendar(){
+  const btn=document.querySelector('[data-tab=cal]');
+  if(btn)show('cal',btn);
+  const pane=document.getElementById('pane-cal');
+  if(pane)pane.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function renderOtherDates(){
