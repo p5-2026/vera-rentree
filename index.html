@@ -180,6 +180,8 @@ main{max-width:660px;margin:0 auto;padding:14px 14px 60px;position:relative;z-in
 .doc-dl-h{font-size:12.5px;font-weight:800;color:var(--ink);margin-bottom:3px}
 .doc-dl-t{font-size:11.5px;color:var(--muted);line-height:1.4;margin-bottom:9px}
 .doc-dl-btn{display:block;width:100%;text-align:center;box-sizing:border-box}
+.abs-mini-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;color:var(--ink);line-height:1.4}
+.abs-mini-row .mi{font-size:14px;flex-shrink:0}
 
 /* ── ACTIVITÉS PARASCOLAIRES ── */
 .act-card{background:var(--card);border-radius:16px;padding:12px 8px;border:1px solid var(--border);box-shadow:0 3px 14px rgba(20,40,80,.09);text-align:center}
@@ -412,17 +414,40 @@ nav{
       <li><span class="ico">🏷️</span><span><strong>Étiqueter tout le matériel</strong> au prénom et nom</span></li>
       <li><span class="ico">💊</span><span><strong>Médicaments interdits</strong> sauf avis médical. Signalez asthme, diabète, allergie au titulaire</span></li>
       <li><span class="ico">🟢🔴</span><span><strong>Carte verte</strong> = part seul. <strong>Carte rouge</strong> = cour / étude 15h45. Départ exceptionnel : mot dans le journal</span></li>
-      <li><span class="ico">📝</span><span>Absences : justifiée par écrit — &lt;3 jours : le jour du retour · &gt;3 jours : dès le 4ème. <a href="mailto:c.hicorne@cndp-erpent.be">c.hicorne@cndp-erpent.be</a>
-        <div class="doc-dl">
-          <div class="doc-dl-h">📄 Justificatif d'absence</div>
-          <div class="doc-dl-t">Téléchargez le document officiel de l'école à compléter en cas d'absence.</div>
-          <a class="ics-btn doc-dl-btn" href="justificatif-absence.docx" download>Télécharger le justificatif d'absence ↓</a>
-        </div>
-      </span></li>
+      <li><span class="ico">📝</span><span>Absences : justifiée par écrit — &lt;3 jours : le jour du retour · &gt;3 jours : dès le 4ème (détails ci-dessous)</span></li>
       <li><span class="ico">🎒</span><span>À remettre : fiche médicale, fiche signalétique (corrections en ROUGE), inscription extrascolaire, autorisation publication</span></li>
       <li><span class="ico">🐛</span><span>Poux : surveiller régulièrement — prévenir l'école si présence, traitement avant retour</span></li>
     </ul></div>
   </div>
+  <div class="section">
+    <p class="sh"><span>Absences</span></p>
+    <div class="card" style="padding:14px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:13.5px;color:var(--ink);margin-bottom:8px"><span>🏫</span><span>Horizon Présences</span></div>
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin:0 0 12px">Horizon Présences permet aux parents de consulter les absences enregistrées par l'école et, si nécessaire, de transmettre un justificatif.</p>
+      <a class="ics-btn doc-dl-btn" href="https://presence.scolares.be" target="_blank" rel="noopener noreferrer" style="margin-bottom:10px">Accéder à Horizon Présences →</a>
+      <details class="hor-fold" style="box-shadow:none;margin-bottom:10px">
+        <summary style="font-size:12px;padding:10px 14px">Première connexion ?</summary>
+        <div class="hor-fold-body" style="padding:0 14px 12px">
+          <p style="font-size:11.5px;color:var(--muted);line-height:1.5;margin:6px 0 0">Lors de votre première connexion, utilisez l'adresse e-mail communiquée à l'école. Sur la page Horizon Présences, choisissez « Première connexion ? Demander son mot de passe » afin de créer votre mot de passe.</p>
+        </div>
+      </details>
+      <div class="abs-mini-row"><span class="mi">👀</span><span>Consulter les absences enregistrées</span></div>
+      <div class="abs-mini-row"><span class="mi">📄</span><span>Voir si une absence doit être justifiée</span></div>
+      <div class="abs-mini-row"><span class="mi">📤</span><span>Transmettre un justificatif lorsque cela est nécessaire</span></div>
+    </div>
+    <div class="card" style="padding:14px;margin-bottom:8px">
+      <div class="doc-dl-h">📄 Justificatif d'absence</div>
+      <div class="doc-dl-t" style="margin-bottom:10px">Vous préférez utiliser le document officiel de l'école ? Téléchargez-le, complétez-le et remettez-le à l'enseignant.</div>
+      <a class="ics-btn doc-dl-btn" href="justificatif-absence.docx" download>Télécharger le justificatif d'absence ↓</a>
+    </div>
+    <div class="card">
+      <div class="nbox" style="border-top:none">
+        <span>✉️</span>
+        <span><a href="mailto:c.hicorne@cndp-erpent.be">c.hicorne@cndp-erpent.be</a></span>
+      </div>
+    </div>
+  </div>
+
   <div class="section">
     <p class="sh"><span>Contacts</span></p>
     <div class="card">
