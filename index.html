@@ -71,14 +71,19 @@ code{font-size:.85em;background:var(--tag);padding:1px 6px;border-radius:4px;fon
 
 /* ── TODAY CARD ── */
 .today-card{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  display:flex;flex-direction:column;
   background:rgba(255,255,255,.82);border:1.5px solid rgba(11,37,82,.16);
   border-radius:14px;padding:12px 16px;margin:0 0 12px;
   box-shadow:0 3px 12px rgba(20,40,80,.08);
 }
+.today-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .today-ico{font-size:15px}
 .today-date{font-size:13px;font-weight:700;color:var(--navy2)}
 .today-msg{font-size:13px;font-weight:800;color:#C9860A;margin-left:auto}
+.today-jdc{display:flex;align-items:center;gap:9px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(11,37,82,.12)}
+.today-jdc-ico{font-size:18px;flex-shrink:0}
+.today-jdc b{font-size:13.5px;font-weight:800;color:var(--navy2);display:block}
+.today-jdc-sub{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
 
 /* ── PROCHAIN RENDEZ-VOUS ── */
 .rdv-card{
@@ -283,9 +288,15 @@ nav{
   </div>
 
   <div class="today-card">
-    <span class="today-ico">📅</span>
-    <span class="today-date" id="todayDate">Aujourd'hui</span>
-    <span class="today-msg" id="todayMsg"></span>
+    <div class="today-top">
+      <span class="today-ico">📅</span>
+      <span class="today-date" id="todayDate">Aujourd'hui</span>
+      <span class="today-msg" id="todayMsg"></span>
+    </div>
+    <div class="today-jdc" id="todayJdc" style="display:none">
+      <span class="today-jdc-ico">✍️</span>
+      <span><b>Journal de classe</b><span class="today-jdc-sub">À vérifier et signer aujourd'hui</span></span>
+    </div>
   </div>
 
   <div class="rdv-card" id="rdvCard" style="display:none">
@@ -417,6 +428,33 @@ nav{
       <li><span class="ico">📝</span><span>Absences : justifiée par écrit — &lt;3 jours : le jour du retour · &gt;3 jours : dès le 4ème (détails ci-dessous)</span></li>
       <li><span class="ico">🎒</span><span>À remettre : fiche médicale, fiche signalétique (corrections en ROUGE), inscription extrascolaire, autorisation publication</span></li>
       <li><span class="ico">🐛</span><span>Poux : surveiller régulièrement — prévenir l'école si présence, traitement avant retour</span></li>
+    </ul></div>
+  </div>
+  <div class="section">
+    <p class="sh"><span>📚 Travail à domicile &amp; Journal de classe</span></p>
+    <div class="card"><ul class="il">
+      <li><span class="ico">📅</span><span>Les devoirs sont communiqués <strong>une semaine à l'avance</strong>, pour permettre de planifier selon les activités extrascolaires</span></li>
+      <li><span class="ico">📓</span><span>Le travail est inscrit dans le journal de classe, au jour où il doit être rendu</span></li>
+      <li><span class="ico">⏱️</span><span>Maximum <strong>30 minutes</strong> de travail par jour</span></li>
+      <li><span class="ico">🚫</span><span><strong>Pas de devoirs le jeudi</strong>, ni au retour des congés scolaires</span></li>
+      <li><span class="ico">🎒</span><span>Le jeudi : vérification et rangement de la mallette (tri, poids, ordre…)</span></li>
+    </ul></div>
+    <div class="card" style="margin-top:8px">
+      <div class="nbox nb-bl" style="border-top:none">
+        <span>✍️</span>
+        <span><strong>Journal de classe :</strong> outil de communication école-parents. À vérifier et signer <strong>chaque jour</strong>.</span>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="sh"><span>📊 Bulletins &amp; évaluations</span></p>
+    <div class="card"><ul class="il">
+      <li><span class="ico">📅</span><span><strong>Novembre :</strong> remise des bulletins du 23 au 27/11/2026</span></li>
+      <li><span class="ico">📅</span><span><strong>Février :</strong> réunion facultative du 15 au 19/02/2027</span></li>
+      <li><span class="ico">📅</span><span><strong>Juillet :</strong> remise des bulletins les 1er et 2/07/2027</span></li>
+      <li><span class="ico">✍️</span><span>La farde d'évaluations doit être signée régulièrement par les parents</span></li>
+      <li><span class="ico">ℹ️</span><span>Pas de session d'examens en P5 — uniquement des contrôles de fin de matières</span></li>
+      <li><span class="ico">🎓</span><span>Le CEB a lieu à la fin de la 6ème primaire</span></li>
     </ul></div>
   </div>
   <div class="section">
@@ -682,8 +720,8 @@ const ACTS=P.get('activites')?P.get('activites').split(','):[];
 
 const MFR=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const WD=['L','M','M','J','V','S','D'];
-const EC={rn:'#2ECC71',pl:'#0097D6',p5:'#E91E8C',hol:'#F5A623',pd:'#FF5A5F',ph:'#9B5DD4',ad:'#4BA3D9',nc:'#E4A853',ev:'#7CB9E8'};
-const LT=[['rn','Rentrée'],['p5','Notre classe (P5)'],['pl','Réunion parents'],['hol','Congés & jours fériés'],['pd','Jour pédagogique'],['ph','Photos'],['ad','Adeps (autres classes)'],['nc','Classes de neige']];
+const EC={rn:'#2ECC71',pl:'#0097D6',p5:'#E91E8C',hol:'#F5A623',pd:'#FF5A5F',ph:'#9B5DD4',ad:'#4BA3D9',nc:'#E4A853',ev:'#7CB9E8',eval:'#2D9C8A',fete:'#C0392B'};
+const LT=[['rn','Rentrée'],['p5','Notre classe (P5)'],['pl','Réunion parents'],['hol','Congés & jours fériés'],['pd','Jour pédagogique'],['ph','Photos'],['ad','Adeps (autres classes)'],['nc','Classes de neige'],['eval','Bulletins & évaluations'],['fete','Fête à l\'école']];
 const MHC=['#2ECC71','#4BA3D9','#F5A623','#9B5DD4','#E91E8C','#0097D6','#9B5DD4','#E4A853','#5CB85C','#4BA3D9','#2ECC71'];
 const SM=[[2026,8],[2026,9],[2026,10],[2026,11],[2026,12],[2027,1],[2027,2],[2027,3],[2027,4],[2027,5],[2027,6]];
 
@@ -706,12 +744,15 @@ const EVENTS=[
   {cat:'ev',ico:'🕯️',title:'Fête des morts',allDay:true,start:[2026,11,2],end:[2026,11,3],p5:false},
   {cat:'hol',ico:'🕊️',title:'Armistice',desc:'Jour férié',allDay:true,start:[2026,11,11],end:[2026,11,12],p5:true},
   {cat:'ev',ico:'🛍️',title:'Brocante AP',allDay:true,start:[2026,11,15],end:[2026,11,16],p5:false},
+  {cat:'eval',ico:'📊',title:'Bulletins — période de remise',allDay:true,start:[2026,11,23],end:[2026,11,28],p5:true},
+  {cat:'fete',ico:'🎅',title:"Saint-Nicolas à l'école",desc:'École normalement',allDay:true,start:[2026,12,4],end:[2026,12,5],p5:true},
   {cat:'hol',ico:'❄️',title:"Congé d'hiver (Noël)",desc:'Retour le 04/01',allDay:true,start:[2026,12,19],end:[2027,1,4],p5:true},
   {cat:'pd',ico:'🚫',title:'Journée pédagogique — Maternelle & Primaire',desc:'Pas école',allDay:true,start:[2027,1,28],end:[2027,1,29],p5:true},
   {cat:'pd',ico:'🚫',title:'Journée pédagogique — Maternelle & Primaire',desc:'Pas école',allDay:true,start:[2027,1,29],end:[2027,1,30],p5:true},
   {cat:'pd',ico:'🚫',title:'Journée pédagogique — Maternelle',desc:'Pas école',allDay:true,start:[2027,2,8],end:[2027,2,9],p5:false},
   {cat:'ev',ico:'🎭',title:'Mardi gras',allDay:true,start:[2027,2,9],end:[2027,2,10],p5:false},
   {cat:'pd',ico:'🚫',title:'Journée pédagogique — P5-P6',desc:'Pas école',allDay:true,start:[2027,2,12],end:[2027,2,13],p5:true},
+  {cat:'eval',ico:'📊',title:'Réunion facultative — bulletins',desc:'Sur rendez-vous',allDay:true,start:[2027,2,15],end:[2027,2,20],p5:true},
   {cat:'hol',ico:'🎪',title:'Congé de Carnaval',desc:'Retour le 08/03',allDay:true,start:[2027,2,20],end:[2027,3,8],p5:true},
   {cat:'nc',ico:'🚌',title:'Départ classes de neige',allDay:true,start:[2027,3,8],end:[2027,3,9],p5:false},
   {cat:'nc',ico:'🚌',title:'Retour classes de neige',allDay:true,start:[2027,3,16],end:[2027,3,17],p5:false},
@@ -721,6 +762,7 @@ const EVENTS=[
   {cat:'hol',ico:'🙏',title:'Pentecôte',desc:'Jour férié',allDay:true,start:[2027,5,17],end:[2027,5,18],p5:true},
   {cat:'ev',ico:'🏃',title:'Jogging AP',allDay:true,start:[2027,5,23],end:[2027,5,24],p5:false},
   {cat:'ev',ico:'🚶',title:"Marche parrainée + Pass'âge P6",allDay:true,start:[2027,6,30],end:[2027,7,1],p5:false},
+  {cat:'eval',ico:'📊',title:"Bulletins — fin d'année",allDay:true,start:[2027,7,1],end:[2027,7,3],p5:true},
   {cat:'hol',ico:'🏖️',title:"Vacances d'été",allDay:true,start:[2027,7,3],end:[2027,7,4],p5:true}
 ];
 function evDate(e){return new Date(e.start[0],e.start[1]-1,e.start[2],e.start[3]||0,e.start[4]||0);}
@@ -858,6 +900,16 @@ function upcomingP5(){
     .sort((a,b)=>evDate(a)-evDate(b));
 }
 
+function isSchoolDay(d){
+  const dow=d.getDay();
+  if(dow===0||dow===6)return false;
+  const y=d.getFullYear(),m=d.getMonth()+1,day=d.getDate();
+  if(inHol(y,m,day))return false;
+  const evs=DAY_MAP[y+'-'+m+'-'+day]||[];
+  if(evs.some(e=>e.cat==='pd'))return false;
+  return true;
+}
+
 function renderToday(){
   const dEl=document.getElementById('todayDate'), mEl=document.getElementById('todayMsg');
   if(!dEl)return;
@@ -865,6 +917,8 @@ function renderToday(){
   const fmt=new Intl.DateTimeFormat('fr-BE',{weekday:'long',day:'numeric',month:'long'});
   dEl.textContent="Aujourd'hui, "+fmt.format(now);
   if(mEl)mEl.textContent=TODAY_MSG;
+  const jdcEl=document.getElementById('todayJdc');
+  if(jdcEl)jdcEl.style.display=isSchoolDay(now)?'':'none';
 }
 
 function renderRdv(){
