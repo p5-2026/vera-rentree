@@ -296,10 +296,6 @@ nav{
       <span class="today-date" id="todayDate">Aujourd'hui</span>
       <span class="today-msg" id="todayMsg"></span>
     </div>
-    <div class="today-jdc" id="todayHoliday" style="display:none">
-      <span class="today-jdc-ico">🍂</span>
-      <span><b id="todayHolTitle" style="color:#B9790A"></b><span class="today-jdc-sub" id="todayHolSub"></span></span>
-    </div>
     <div class="today-jdc" id="todayJdc" style="display:none">
       <span class="today-jdc-ico">✍️</span>
       <span><b>Journal de classe</b><span class="today-jdc-sub">À vérifier et signer aujourd'hui</span></span>
@@ -937,9 +933,6 @@ function holAt(y,m,d){
     return v>=sv&&v<ev2;
   });
 }
-function currentHoliday(now){
-  return holAt(now.getFullYear(),now.getMonth()+1,now.getDate());
-}
 function dateEventKey(y,m,d){
   const k=y+'-'+m+'-'+d;
   const evs=DAY_MAP[k]||[];
@@ -978,17 +971,6 @@ function renderToday(){
   if(mEl)mEl.textContent=TODAY_MSG;
   const jdcEl=document.getElementById('todayJdc');
   if(jdcEl)jdcEl.style.display=isSchoolDay(now)?'':'none';
-  const holEl=document.getElementById('todayHoliday');
-  if(holEl){
-    const hol=currentHoliday(now);
-    if(hol){
-      holEl.style.display='';
-      document.getElementById('todayHolTitle').textContent=hol.title;
-      document.getElementById('todayHolSub').textContent=holidayMsg(hol);
-    } else {
-      holEl.style.display='none';
-    }
-  }
 }
 
 function renderRdv(){
@@ -1000,20 +982,42 @@ function renderRdv(){
   card.style.display='';
   const accent=EC[ev.cat]||EC.p5;
   document.getElementById('rdvHead').style.color=accent;
-  document.getElementById('rdvDay').textContent=ev.start[2];
-  document.getElementById('rdvMon').textContent=MOIS_ABBR[ev.start[1]-1];
   document.getElementById('rdvMon').style.color=accent;
   document.querySelector('.rdv-date').style.borderColor=accent;
   card.style.borderColor=accent+'59';
-  const dow=new Intl.DateTimeFormat('fr-BE',{weekday:'long'}).format(evDate(ev));
-  document.getElementById('rdvDow').textContent=dow.toUpperCase();
+
+  const today0=new Date();today0.setHours(0,0,0,0);
+  const evDay=new Date(ev.start[0],ev.start[1]-1,ev.start[2]);evDay.setHours(0,0,0,0);
+  const evEnd=ev.allDay?new Date(ev.end[0],ev.end[1]-1,ev.end[2]):null;
+  const ongoing=ev.allDay&&evEnd&&today0>=evDay&&today0<evEnd;
+
+  const dayEl=document.getElementById('rdvDay'), monEl=document.getElementById('rdvMon'), dowEl=document.getElementById('rdvDow');
+  if(ongoing){
+    dayEl.textContent=ev.ico;
+    dayEl.style.fontSize='30px';
+    monEl.textContent='EN COURS';
+    dowEl.style.display='none';
+  } else {
+    dayEl.textContent=ev.start[2];
+    dayEl.style.fontSize='';
+    monEl.textContent=MOIS_ABBR[ev.start[1]-1];
+    dowEl.style.display='';
+    const dow=new Intl.DateTimeFormat('fr-BE',{weekday:'long'}).format(evDate(ev));
+    dowEl.textContent=dow.toUpperCase();
+  }
   document.getElementById('rdvTitle').textContent=ev.title;
   const timeEl=document.getElementById('rdvTime');
-  timeEl.textContent=ev.time?'🕢 '+ev.time:'';
-  timeEl.style.display=ev.time?'':'none';
   const locEl=document.getElementById('rdvLoc');
-  locEl.textContent=ev.loc?'📍 '+ev.loc:'';
-  locEl.style.display=ev.loc?'':'none';
+  if(ongoing){
+    timeEl.style.display='none';
+    locEl.textContent='📅 '+holidayMsg(ev);
+    locEl.style.display='';
+  } else {
+    timeEl.textContent=ev.time?'🕢 '+ev.time:'';
+    timeEl.style.display=ev.time?'':'none';
+    locEl.textContent=ev.loc?'📍 '+ev.loc:'';
+    locEl.style.display=ev.loc?'':'none';
+  }
 }
 
 function goToCalendar(){
