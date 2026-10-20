@@ -751,7 +751,15 @@ const EVENTS=[
   {cat:'ev',ico:'🕯️',title:'Fête des morts',allDay:true,start:[2026,11,2],end:[2026,11,3],p5:false},
   {cat:'ev',ico:'🧥',title:'Semaine sans chauffage',desc:'Chauffage coupé — habillez les enfants chaudement (pulls chauds)',allDay:true,start:[2026,11,2],end:[2026,11,7],p5:true},
   {cat:'hol',ico:'🕊️',title:'Armistice',desc:'Jour férié',allDay:true,start:[2026,11,11],end:[2026,11,12],p5:true},
-  {cat:'ev',ico:'🛍️',title:'14ème Brocante couverte',time:'8h30–14h30',loc:'Au Collège, Place ND de la Paix, 5101 Erpent — parking gratuit, bar et petite restauration',desc:'Jouets, vêtements, déco… Réservations exposants sur www.brocante-ap-cndp.be dès le 25/10 11h00 — 9€/table',allDay:true,start:[2026,11,15],end:[2026,11,16],p5:true},
+  {cat:'ev',ico:'🛍️',title:'14ème Brocante couverte',time:'8h30–14h30',loc:'Au Collège, Place ND de la Paix, 5101 Erpent',desc:'Jouets, vêtements, déco… 9€/table',allDay:true,start:[2026,11,15],end:[2026,11,16],p5:true,
+    expand:{
+      text:"L'Association des parents organise sa 14ème brocante couverte : jouets, vêtements, décoration et bien d'autres trésors à dénicher. Une belle occasion de faire du tri ou de donner une seconde vie aux objets !",
+      bullets:['9 € par table de 120 × 80 cm','Nombre de tables par personne illimité','Réservations groupées possibles pour être placés à côté de ses connaissances'],
+      extra:'🚗 Grand parking gratuit · ☕ Bar et petite restauration sur place',
+      btnUrl:'https://www.brocante-ap-cndp.be',
+      btnLabel:'Réserver une table →',
+      reservOpen:[2026,10,25,11,0]
+    }},
   {cat:'eval',ico:'📊',title:'Bulletins — période de remise',allDay:true,start:[2026,11,23],end:[2026,11,28],p5:true},
   {cat:'fete',ico:'🎅',title:"Saint-Nicolas à l'école",desc:'École normalement',allDay:true,start:[2026,12,4],end:[2026,12,5],p5:true},
   {cat:'hol',ico:'❄️',title:"Congé d'hiver (Noël)",desc:'Retour le 04/01',allDay:true,start:[2026,12,19],end:[2027,1,4],p5:true},
@@ -1069,6 +1077,27 @@ function makeICS(ev){
   return 'data:text/calendar;charset=utf8,'+encodeURIComponent(lines.join('\r\n'));
 }
 
+function expandBlockHtml(ex){
+  let statusHtml='';
+  if(ex.reservOpen){
+    const ro=ex.reservOpen;
+    const roDate=new Date(ro[0],ro[1]-1,ro[2],ro[3]||0,ro[4]||0);
+    const isOpen=new Date()>=roDate;
+    const label=isOpen?'✅ Réservations ouvertes':'⏳ Réservations dès le '+ro[2]+' '+MFR[ro[1]-1].toLowerCase()+' à '+ro[3]+'h';
+    statusHtml='<div style="font-size:11.5px;font-weight:800;color:'+(isOpen?'var(--mint)':'var(--sky)')+';margin-bottom:9px">'+label+'</div>';
+  }
+  const bulletsHtml=(ex.bullets||[]).map(b=>'<li><span class="ico">•</span><span>'+escHtml(b)+'</span></li>').join('');
+  return '<details class="hor-fold" style="margin-top:8px">'
+    +'<summary style="font-size:12px;padding:10px 14px">En savoir plus ↓</summary>'
+    +'<div class="hor-fold-body">'
+    +'<p style="font-size:12px;color:var(--muted);line-height:1.55;margin:8px 0 10px">'+escHtml(ex.text)+'</p>'
+    +(bulletsHtml?'<ul class="il" style="margin:0 0 10px">'+bulletsHtml+'</ul>':'')
+    +(ex.extra?'<p style="font-size:11.5px;color:var(--muted);margin:0 0 10px">'+escHtml(ex.extra)+'</p>':'')
+    +statusHtml
+    +'<a class="ics-btn" href="'+ex.btnUrl+'" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;text-align:center;box-sizing:border-box">'+escHtml(ex.btnLabel)+'</a>'
+    +'</div></details>';
+}
+
 const impGrid=document.getElementById('imp-grid');
 if(impGrid){
   EVENTS.filter(e=>e.p5).forEach(ev=>{
@@ -1079,6 +1108,7 @@ if(impGrid){
       +'<div><div class="an">'+ev.ico+' '+escHtml(ev.title)+'</div><div class="aw">'+evLabel(ev)+(ev.desc?'<br>'+escHtml(ev.desc):'')+(ev.loc?'<br>📍 '+escHtml(ev.loc):'')+'</div></div></div>'
       +'<a class="ics-btn" href="'+makeICS(ev)+'" download="'+ev.title.replace(/[^a-z0-9]+/gi,'-')+'.ics">+ Ajouter</a>'
       +'</div>');
+    if(ev.expand)impGrid.insertAdjacentHTML('beforeend',expandBlockHtml(ev.expand));
   });
 }
 
